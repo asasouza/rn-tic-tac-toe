@@ -169,6 +169,7 @@ class MainScreen extends Component {
 
 const styles = StyleSheet.create({
 	container: {
+		backgroundColor: '#FFF',
 		flex: 1,
 		justifyContent: 'space-between',
 		paddingVertical: 10,
