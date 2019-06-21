@@ -110,14 +110,6 @@ class MainScreen extends Component {
 		});
 	}
 
-	_renderMatchResult = () => {
-		const { matchResult } = this.state;
-		if (!matchResult) { return null; }
-		return (
-			<Text style={{ alignSelf: 'center', fontSize: 20 }}>{matchResult}</Text>
-		);
-	}
-
 	_renderCells = () => {
 		return [0, 1, 2, 3, 4, 5, 6, 7, 8].map(cell => {
 			return (
@@ -132,7 +124,7 @@ class MainScreen extends Component {
 
 	render() {
 		const { cellsContainer, container } = styles;
-		const { gameStarted, matchsCount, playerOneTurn } = this.state;
+		const { gameStarted, matchsCount, matchResult, playerOneTurn } = this.state;
 
 		return (
 			<View style={container}>
@@ -147,11 +139,10 @@ class MainScreen extends Component {
 					{this._renderCells()}
 				</View>
 
-				{this._renderMatchResult()}
-
 				<GameController 
 					gameStarted={gameStarted}
 					cleanTable={this._cleanTable}
+					matchResult={matchResult}
 				/>
 				
 			</View>
@@ -162,7 +153,6 @@ class MainScreen extends Component {
 const styles = StyleSheet.create({
 	container: {
 		// backgroundColor: 'rgba(88, 107, 143, 0.3)',
-		// backgroundColor: '#FFF',
 		flex: 1,
 		justifyContent: 'space-between',
 		paddingVertical: 10,
@@ -172,7 +162,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		flexWrap: 'wrap',
 		justifyContent: 'space-around',
-		padding: 10
+		padding: 10,
 	}
 });
 

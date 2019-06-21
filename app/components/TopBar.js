@@ -6,26 +6,45 @@ import { StyleSheet, Text, View } from 'react-native';
 import { colors } from '../constants/Styles';
 
 class TopBar extends PureComponent {
+	_renderLabel = () => {
+		const { gameStarted, playerOneTurn } = this.props;
+		const { player } = styles;
+
+		if (!gameStarted) {
+			return (
+				<Text style={player}>
+					<Text style={{ color: colors.primary }}>Tic</Text>
+					<Text style={{ color: colors.secondary }}>Tac</Text>
+					<Text style={{ color: colors.primary }}>Toe</Text>
+				</Text>
+			);
+		}
+
+		return (
+			<Text 
+				style={[
+					player,
+					{ color: playerOneTurn ? colors.primary : colors.secondary }
+				]}
+			>
+				{playerOneTurn ? 'Player One Turn' : 'Player Two Turn'}
+			</Text>
+		);
+	}
+
 	render() {
-		const { container, counter, counterContainer, player } = styles;
-		const { gameStarted, matchsCount, playerOneTurn } = this.props;
+		const { container, counter, counterContainer } = styles;
+		const { matchsCount } = this.props;
 		return (
 			<View style={container}>
-				{ gameStarted &&
-					<Text 
-						style={[
-							player,
-							{ color: playerOneTurn ? colors.primary : colors.secondary }
-						]}
-					>
-						{ playerOneTurn ? 'Player One Turn' : 'Player Two Turn' }
-					</Text>
-				}
 
 				<View style={counterContainer}>
 					<Text style={counter}>Games Played</Text>
 					<Text style={counter}>{matchsCount}</Text>
 				</View>
+
+				{this._renderLabel()}
+				
 			</View>
 		);
 	}
@@ -39,27 +58,24 @@ TopBar.propTypes = {
 
 const styles = StyleSheet.create({
 	container: {
-		alignItems: 'center',
-		// backgroundColor: '#FFF',
-		flexDirection: 'row',
 		paddingHorizontal: 15,
 		paddingVertical: 5,
-		justifyContent: 'flex-end'
 	},
 	player: {
 		alignSelf: 'center',
-		color: colors.primary,
-		fontSize: 25,
+		fontSize: 30,
 		fontWeight: 'bold',
 	},
 	counterContainer: {
+		alignSelf: 'flex-end',
 		alignItems: 'center',
-		marginLeft: 20,
+		marginBottom: 15
 	},
 	counter: {
-		fontSize: 10,
-		color: '#000',
-		flexWrap: 'wrap'
+		color: '#2D3142',
+		// flexWrap: 'wrap',
+		fontSize: 12,
+		fontWeight: 'bold'
 	}
 });
 

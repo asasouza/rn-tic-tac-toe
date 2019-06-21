@@ -23,11 +23,14 @@ class GameController extends PureComponent {
 	}
 
 	render() {
-		const { buttonContainer, buttonStart, buttonRestart, buttonText, container } = styles;
-		const { gameStarted, cleanTable } = this.props;
+		const { buttonContainer, buttonStart, buttonRestart, buttonText, container, resultText } = styles;
+		const { cleanTable, gameStarted, matchResult } = this.props;
 
 		return (
 			<View style={container}>
+				
+				<Text style={resultText}>{matchResult}</Text>
+
 				<TouchableOpacity
 					activeOpacity={0.5}
 					style={[buttonContainer, gameStarted ? buttonRestart : buttonStart]}
@@ -43,8 +46,9 @@ class GameController extends PureComponent {
 }
 
 GameController.propTypes = {
-	gameStarted: PropTypes.bool.isRequired,
 	cleanTable: PropTypes.func.isRequired,
+	gameStarted: PropTypes.bool.isRequired,
+	matchResult: PropTypes.string,
 };
 
 const styles = StyleSheet.create({
@@ -59,7 +63,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#8abd98',
 	},
 	buttonRestart: {
-		backgroundColor: '#bbb',
+		backgroundColor: '#2D3142',
 	},
 	buttonText: {
 		color: '#FFF',
@@ -70,6 +74,11 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center'
 	},
+	resultText: {
+		fontSize: 20,
+		marginBottom: 10,
+		fontWeight: 'bold'
+	}
 
 });
 

@@ -44,7 +44,9 @@ Cell.propTypes = {
 const styles = StyleSheet.create({
 	container: {
 		alignItems: 'center',
-		backgroundColor: '#f4ead6',
+		backgroundColor: '#F0CDAF',
+		borderColor: '#E7AF80',
+		borderWidth: 2,
 		borderRadius: 10,
 		height: 100,
 		justifyContent: 'center',
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
 
 	},
 	text: {
-		fontSize: 90,
+		fontSize: 85,
 	}
 });
 
