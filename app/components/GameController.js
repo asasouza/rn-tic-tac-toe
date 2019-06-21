@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#8abd98',
 	},
 	buttonRestart: {
-		backgroundColor: '#2D3142',
+		backgroundColor: '#9A9894',
 	},
 	buttonText: {
 		color: '#FFF',

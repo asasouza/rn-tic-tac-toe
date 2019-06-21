@@ -23,6 +23,7 @@ class MainScreen extends Component {
 			playerOneTurn: true,
 			playerTwoCells: {},
 			table: {},
+			winnerCells: {}
 		};
 	}
 
@@ -37,41 +38,41 @@ class MainScreen extends Component {
 		if (Object.keys(cellsObject).length >= 3) {
 			if (cellsObject[0]) {
 				if (cellsObject[1] && cellsObject[2]) {
-					return this._setWinner();
+					return this._setWinner([0, 1, 2]);
 				}
 				if (cellsObject[3] && cellsObject[6]) {
-					return this._setWinner();
+					return this._setWinner([0, 3, 6]);
 				}
 				if (cellsObject[4] && cellsObject[8]) {
-					return this._setWinner();
+					return this._setWinner([0, 4, 8]);
 				}
 			}
 			if (cellsObject[8]) {
 				if (cellsObject[6] && cellsObject[7]) {
-					return this._setWinner();
+					return this._setWinner([8, 6, 7]);
 				}
 				if (cellsObject[2] && cellsObject[5]) {
-					return this._setWinner();
+					return this._setWinner([8, 2, 5]);
 				}
 			}
 			if (cellsObject[4]) {
 				if (cellsObject[1] && cellsObject[7]) {
-					return this._setWinner();
+					return this._setWinner([4, 1, 7]);
 				}
 				if (cellsObject[3] && cellsObject[5]) {
-					return this._setWinner();
+					return this._setWinner([4, 3, 5]);
 				}
 				if (cellsObject[6] && cellsObject[2]) {
-					return this._setWinner();
+					return this._setWinner([4, 6, 2]);
 				}
 			}
 		}
 		if (Object.keys(this.state.table).length === 9 && !this.state.matchResult) {
-			this._setWinner('tie');
+			this._setWinner([], 'tie');
 		}
 	}
 
-	_setWinner = (tie) => {
+	_setWinner = (winnerCells, tie) => {
 		const { matchsCount, playerOneTurn } = this.state;
 		let matchResult = '';
 		if (tie) {
@@ -79,6 +80,7 @@ class MainScreen extends Component {
 		} else {
 			this.confetti.current.startConfetti();
 			matchResult = playerOneTurn ? 'Player Two Wins' : 'Player One Wins';
+			this.setState({ winnerCells: { [winnerCells[0]]: true, [winnerCells[1]]: true, [winnerCells[2]]: true } });
 		}
 
 		StorageProvider.setMatchsCount(matchsCount + 1);
@@ -107,11 +109,12 @@ class MainScreen extends Component {
 	_cleanTable = () => {
 		this.setState({
 			gameStarted: true,
-			table: [],
+			matchResult: null,
+			playerOneCells: {},
 			playerOneTurn: true,
-			playerOneCells: [],
-			playerTwoCells: [],
-			matchResult: null
+			playerTwoCells: {},
+			table: {},
+			winnerCells: {},
 		});
 	}
 
@@ -122,6 +125,7 @@ class MainScreen extends Component {
 					key={cell}
 					onPress={() => this._changeCellValue(cell)} 
 					value={this.state.table[cell]} 
+					winnerCell={this.state.winnerCells[cell]}
 				/>
 			);
 		});
@@ -130,7 +134,7 @@ class MainScreen extends Component {
 	render() {
 		const { cellsContainer, container } = styles;
 		const { gameStarted, matchsCount, matchResult, playerOneTurn } = this.state;
-
+		
 		return (
 			<View style={container}>
 

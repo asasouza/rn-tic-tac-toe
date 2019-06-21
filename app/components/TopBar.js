@@ -32,15 +32,32 @@ class TopBar extends PureComponent {
 		);
 	}
 
+	_renderPlayerLabel = () => {
+		const { gameStarted, playerOneTurn } = this.props;
+		const { playerCharacterContainer, playerCharacterText } = styles;
+		return (
+			<View style={[playerCharacterContainer, { backgroundColor: gameStarted ? '#eee' : 'transparent' }]}>
+				{ gameStarted &&
+					<Text style={[playerCharacterText, { color: playerOneTurn ? colors.primary : colors.secondary }]}>
+						{playerOneTurn ? 'O' : 'X'}
+					</Text>
+				}
+			</View>
+		);
+	}
+
 	render() {
-		const { container, counter, counterContainer } = styles;
+		const { container, counter, counterContainer, topContainer } = styles;
 		const { matchsCount } = this.props;
 		return (
 			<View style={container}>
 
-				<View style={counterContainer}>
-					<Text style={counter}>Games Played</Text>
-					<Text style={counter}>{matchsCount}</Text>
+				<View style={topContainer}>
+					{this._renderPlayerLabel()}
+					<View style={counterContainer}>
+						<Text style={counter}>Games Played</Text>
+						<Text style={counter}>{matchsCount}</Text>
+					</View>
 				</View>
 
 				{this._renderLabel()}
@@ -61,20 +78,35 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 15,
 		paddingVertical: 5,
 	},
-	player: {
-		alignSelf: 'center',
-		fontSize: 30,
-		fontWeight: 'bold',
-	},
 	counterContainer: {
 		alignSelf: 'flex-end',
 		alignItems: 'center',
 		marginBottom: 15
 	},
 	counter: {
-		color: '#2D3142',
+		color: '#9A9894',
 		fontSize: 12,
 		fontWeight: 'bold'
+	},
+	player: {
+		alignSelf: 'center',
+		fontSize: 30,
+		fontWeight: 'bold',
+	},
+	playerCharacterContainer: {
+		alignItems: 'center', 
+		borderRadius: 5, 
+		height: 40, 
+		justifyContent: 'center', 
+		width: 40, 
+	},
+	playerCharacterText: {
+		fontSize: 20, 
+		fontWeight: 'bold'
+	},
+	topContainer: {
+		flexDirection: 'row', 
+		justifyContent: 'space-between'
 	}
 });
 

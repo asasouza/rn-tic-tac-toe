@@ -11,8 +11,20 @@ class Cell extends PureComponent {
 		super(props);
 
 		this.state = {
-			animation: null
+			animation: null,
+			iterationCount: 1,
+			prevValue: null,
 		};
+	}
+
+	componentDidUpdate(prevProps) {
+		if (prevProps.value && !this.props.value) {
+			this.setState({ animation: 'bounceOut', prevValue: prevProps.value });
+			setTimeout(() => this.setState({ animation: null, prevValue: null }), 500);
+		}
+		if (this.props.winnerCell && this.props.value) {
+			this.setState({ animation: 'pulse', iterationCount: 'infinite' });
+		}
 	}
 
 	_onPress = () => {
@@ -27,7 +39,7 @@ class Cell extends PureComponent {
 
 	render() {
 		const { container, text } = styles;
-		const { animation } = this.state;
+		const { animation, iterationCount, prevValue } = this.state;
 		const { value } = this.props;
 
 		return (
@@ -40,13 +52,14 @@ class Cell extends PureComponent {
 					animation={animation}
 					duration={500}
 					easing='linear'
+					iterationCount={iterationCount}
 					style={[
 						text, 
-						{ color: value === 'O' ? colors.primary : colors.secondary } 
+						{ color: value === 'O' || prevValue === 'O' ? colors.primary : colors.secondary } 
 					]}
 					useNativeDriver
 				>
-					{value}
+					{value || prevValue}
 				</AnimatedText>
 			</TouchableOpacity>
 		);
@@ -61,8 +74,8 @@ Cell.propTypes = {
 const styles = StyleSheet.create({
 	container: {
 		alignItems: 'center',
-		backgroundColor: '#F0CDAF',
-		borderColor: '#E7AF80',
+		backgroundColor: '#F8E7D9',
+		borderColor: '#F1D3B9',
 		borderRadius: 10,
 		borderWidth: 2,
 		height: 100,
