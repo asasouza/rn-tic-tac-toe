@@ -8,7 +8,7 @@ import { colors } from '../constants/Styles';
 class TopBar extends PureComponent {
 	render() {
 		const { container, counter, counterContainer, player } = styles;
-		const { gameStarted, gamesPlayed, playerOneTurn } = this.props;
+		const { gameStarted, matchsCount, playerOneTurn } = this.props;
 		return (
 			<View style={container}>
 				{ gameStarted &&
@@ -24,7 +24,7 @@ class TopBar extends PureComponent {
 
 				<View style={counterContainer}>
 					<Text style={counter}>Games Played</Text>
-					<Text style={counter}>{gamesPlayed}</Text>
+					<Text style={counter}>{matchsCount}</Text>
 				</View>
 			</View>
 		);
@@ -32,7 +32,7 @@ class TopBar extends PureComponent {
 }
 
 TopBar.propTypes = {
-	gamesPlayed: PropTypes.number,
+	matchsCount: PropTypes.number,
 	gameStarted: PropTypes.bool.isRequired,
 	playerOneTurn: PropTypes.bool.isRequired
 };

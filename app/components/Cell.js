@@ -6,16 +6,29 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { colors } from '../constants/Styles';
 
 class Cell extends PureComponent {
+	_onPress = () => {
+		const { onPress, value } = this.props;
+		if (!value) {
+			onPress();
+		}
+	}
+
 	render() {
 		const { container, text } = styles;
-		const { onPress, value } = this.props;
+		const { value } = this.props;
+
 		return (
 			<TouchableOpacity
 				activeOpacity={0.9}
-				onPress={onPress}
+				onPress={this._onPress}
 				style={container}
 			>
-				<Text style={text}>
+				<Text 
+					style={[
+						text, 
+						{ color: value === 'O' ? colors.primary : colors.secondary } 
+					]}
+				>
 					{value}
 				</Text>
 			</TouchableOpacity>
@@ -42,7 +55,6 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		fontSize: 90,
-		color: colors.primary,
 	}
 });
 
