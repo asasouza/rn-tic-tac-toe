@@ -1,8 +1,16 @@
 # React Native TicTacToe - Alex Sandro A. Souza @asasouza
 
-<p>Este projeto trata-se de um jogo popularmente conhecido como "jogo da velha" ou "tic tac toe", em inglês, realizado como um teste.</p> <br>
+<p>Este projeto trata-se de um jogo popularmente conhecido como "jogo da velha" ou "tic tac toe", em inglês, realizado como um teste.</p>
+<p>Atualmente como não possuo equipamentos para testar a aplicação em dispositivos iOS a aplicação foi <b>desenvolvida e testada em dispositivos Android</b>. Futuramente pretendo atualizar este projeto para testa-lo, e sanar quaisquer problemas encontrados, em dispositivos iOS (IPhone).</p>
+<p>Agradecimentos à <a href="https://twitter.com/rianyoliveira">Riany Oliveira</a> pelo ícone e splash screen do aplicativo.</p> 
 
-<p>Atualmente como não possuo equipamentos para testar a aplicação em dispositivos iOS a aplicação foi <b>desenvolvida e testada em dispositivos Android</b>. Futuramente pretendo atualizar este projeto para testa-lo, e sanar quaisquer problemas encontrados, em dispositivos iOS (IPhone)</p>
+## Screenshots
+<img src="https://github.com/asasouza/rn-tic-tac-toe/blob/master/images/splash_screen.jpg" width="200" height="350" align="left"/>
+<img src="https://github.com/asasouza/rn-tic-tac-toe/blob/master/images/game_start.jpg" width="200" height="350" align="left"/>
+<img src="https://github.com/asasouza/rn-tic-tac-toe/blob/master/images/game_started.jpg" width="200" height="350" align="left"/>
+<img src="https://github.com/asasouza/rn-tic-tac-toe/blob/master/images/win_screen.jpg" width="200" height="350" />
+
+<br>
 
 ## Configurando o ambiente de desenvolvimento
 1. Acesse o repositório do projeto hospedado no <a href='https://github.com/asasouza/rn-tic-tac-toe'>Github</a> e clone-o para o diretório desejada através do comando <code>git clone https://github.com/asasouza/rn-tic-tac-toe.git</code>.
