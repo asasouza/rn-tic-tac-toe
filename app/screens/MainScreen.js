@@ -1,6 +1,7 @@
 // Modules
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Confetti from 'react-native-confetti';
 // Components
 import Cell from '../components/Cell';
 import GameController from '../components/GameController';
@@ -11,6 +12,8 @@ import StorageProvider from '../providers/StorageProvider';
 class MainScreen extends Component {
 	constructor(props) {
 		super(props);
+
+		this.confetti = React.createRef();
 
 		this.state = {
 			gameStarted: false,
@@ -74,8 +77,10 @@ class MainScreen extends Component {
 		if (tie) {
 			matchResult = 'It\'s a Tie!';
 		} else {
+			this.confetti.current.startConfetti();
 			matchResult = playerOneTurn ? 'Player Two Wins' : 'Player One Wins';
 		}
+
 		StorageProvider.setMatchsCount(matchsCount + 1);
 		this.setState({
 			gameStarted: false,
@@ -99,9 +104,9 @@ class MainScreen extends Component {
 		}
 	}
 
-	_cleanTable = (startGame) => {
+	_cleanTable = () => {
 		this.setState({
-			gameStarted: startGame,
+			gameStarted: true,
 			table: [],
 			playerOneTurn: true,
 			playerOneCells: [],
@@ -130,8 +135,8 @@ class MainScreen extends Component {
 			<View style={container}>
 
 				<TopBar 
-					matchsCount={matchsCount}
 					gameStarted={gameStarted}
+					matchsCount={matchsCount}
 					playerOneTurn={playerOneTurn} 
 				/>
 
@@ -140,11 +145,19 @@ class MainScreen extends Component {
 				</View>
 
 				<GameController 
-					gameStarted={gameStarted}
 					cleanTable={this._cleanTable}
+					gameStarted={gameStarted}
 					matchResult={matchResult}
 				/>
 				
+				<Confetti 
+					bsize={2}
+					confettiCount={20}
+					ref={this.confetti} 
+					size={1.5}
+					timeout={0}
+				/>
+
 			</View>
 		);
 	}
@@ -152,7 +165,6 @@ class MainScreen extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		// backgroundColor: 'rgba(88, 107, 143, 0.3)',
 		flex: 1,
 		justifyContent: 'space-between',
 		paddingVertical: 10,

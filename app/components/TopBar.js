@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
 	},
 	counter: {
 		color: '#2D3142',
-		// flexWrap: 'wrap',
 		fontSize: 12,
 		fontWeight: 'bold'
 	}

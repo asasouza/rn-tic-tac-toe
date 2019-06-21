@@ -16,7 +16,7 @@ class GameController extends PureComponent {
 				},
 				{
 					text: 'OK',
-					onPress: () => this.props.cleanTable(false)
+					onPress: () => this.props.cleanTable()
 				}
 			]
 		);
@@ -33,8 +33,8 @@ class GameController extends PureComponent {
 
 				<TouchableOpacity
 					activeOpacity={0.5}
+					onPress={gameStarted ? this._onPressReset : () => cleanTable()}
 					style={[buttonContainer, gameStarted ? buttonRestart : buttonStart]}
-					onPress={gameStarted ? this._onPressReset : () => cleanTable(true)}
 				>
 					<Text style={buttonText}>
 						{gameStarted ? 'Restart Game' : 'Start New Game'}

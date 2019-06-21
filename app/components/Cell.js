@@ -1,20 +1,33 @@
 // Modules
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Text as AnimatedText } from 'react-native-animatable';
 // Constants
 import { colors } from '../constants/Styles';
 
 class Cell extends PureComponent {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			animation: null
+		};
+	}
+
 	_onPress = () => {
 		const { onPress, value } = this.props;
 		if (!value) {
-			onPress();
+			this.setState({ animation: 'bounceIn' });
+			return onPress();
 		}
+		setTimeout(() => this.setState({ animation: null }), 500);
+		return this.setState({ animation: 'swing' });
 	}
 
 	render() {
 		const { container, text } = styles;
+		const { animation } = this.state;
 		const { value } = this.props;
 
 		return (
@@ -23,14 +36,18 @@ class Cell extends PureComponent {
 				onPress={this._onPress}
 				style={container}
 			>
-				<Text 
+				<AnimatedText 
+					animation={animation}
+					duration={500}
+					easing='linear'
 					style={[
 						text, 
 						{ color: value === 'O' ? colors.primary : colors.secondary } 
 					]}
+					useNativeDriver
 				>
 					{value}
-				</Text>
+				</AnimatedText>
 			</TouchableOpacity>
 		);
 	}
@@ -46,14 +63,13 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: '#F0CDAF',
 		borderColor: '#E7AF80',
-		borderWidth: 2,
 		borderRadius: 10,
+		borderWidth: 2,
 		height: 100,
 		justifyContent: 'center',
 		marginBottom: 10,
 		padding: 20,
 		width: '30%',
-
 	},
 	text: {
 		fontSize: 85,
