@@ -17,11 +17,11 @@ class Cell extends PureComponent {
 
 	_onPress = () => {
 		const { onPress, value } = this.props;
+		setTimeout(() => this.setState({ animation: null }), 500);
 		if (!value) {
 			this.setState({ animation: 'bounceIn' });
 			return onPress();
 		}
-		setTimeout(() => this.setState({ animation: null }), 500);
 		return this.setState({ animation: 'swing' });
 	}
 
