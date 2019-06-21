@@ -67,8 +67,9 @@ class Cell extends PureComponent {
 }
 
 Cell.propTypes = {
+	onPress: PropTypes.func.isRequired,
 	value: PropTypes.string,
-	onPress: PropTypes.func.isRequired
+	winnerCell: PropTypes.bool
 };
 
 const styles = StyleSheet.create({
