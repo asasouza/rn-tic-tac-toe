@@ -29,15 +29,15 @@ A aplicação é divida na seguinte hierarquia de diretórios:
 Foram utilizadas as seguintes tecnologias para desenvolvimento desta aplicação de teste:
 
 		- React Native;
-		- <a href='https://github.com/oblador/react-native-animatable'>React Native Animatable</a>;
-		- <a href='https://github.com/react-native-community/async-storage/tree/LEGACY'>React Native Async Storage</a>
+		- React Native Animatable[https://github.com/oblador/react-native-animatable];
+		- React Native Async Storage[https://github.com/react-native-community/async-storage]
 		- Javascript ES6 + Babel;		
 		- PropTypes;
 		- ESLint;
 
 ## Requisitos do Teste
 
-Obs: os requisitos do teste foram enviados em inglês, optei por não traduzir o texto e replica-lo na íntegra.
+Obs: os requisitos do teste foram enviados em inglês, optei por não traduzir o texto e replica-lo na íntegra. <br>
 Obs2: as figuras citadas durante o texto (Figure 1, 2 e 3) não foram disponibilizadas no repositório original, portanto não estão disponíveis neste repositório também.
 
 
